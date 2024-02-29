@@ -1,6 +1,9 @@
+package br.com.viniciumota.domain;
+
 import java.util.Objects;
 
 public class Cliente {
+
     private String nome;
     private Long cpf;
     private Long tel;
@@ -9,14 +12,15 @@ public class Cliente {
     private String cidade;
     private String estado;
 
-    public Cliente(String nome, java.lang.Long cpf, java.lang.Long tel, String end, java.lang.Integer numero, String cidade, String estado) {
+    public Cliente(String nome, String cpf, String tel, String end, String num, String cidade, String estado) {
         this.nome = nome;
-        this.cpf = cpf;
-        this.tel = tel;
+        this.cpf = Long.valueOf(cpf.trim());
+        this.tel = Long.valueOf(tel.trim());
         this.end = end;
-        this.numero = numero;
+        this.numero = Integer.valueOf(num.trim());
         this.cidade = cidade;
         this.estado = estado;
+
     }
 
     public String getNome() {
@@ -27,19 +31,19 @@ public class Cliente {
         this.nome = nome;
     }
 
-    public java.lang.Long getCpf() {
+    public Long getCpf() {
         return cpf;
     }
 
-    public void setCpf(java.lang.Long cpf) {
+    public void setCpf(Long cpf) {
         this.cpf = cpf;
     }
 
-    public java.lang.Long getTel() {
+    public Long getTel() {
         return tel;
     }
 
-    public void setTel(java.lang.Long tel) {
+    public void setTel(Long tel) {
         this.tel = tel;
     }
 
@@ -51,11 +55,11 @@ public class Cliente {
         this.end = end;
     }
 
-    public java.lang.Integer getNumero() {
+    public Integer getNumero() {
         return numero;
     }
 
-    public void setNumero(java.lang.Integer numero) {
+    public void setNumero(Integer numero) {
         this.numero = numero;
     }
 
@@ -75,15 +79,24 @@ public class Cliente {
         this.estado = estado;
     }
 
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        if (!super.equals(object)) return false;
-        Cliente cliente = (Cliente) object;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cliente cliente = (Cliente) o;
         return Objects.equals(cpf, cliente.cpf);
     }
 
+    @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), cpf);
+        return Objects.hash(cpf);
+    }
+
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "nome='" + nome + '\'' +
+                ", cpf=" + cpf +
+                '}';
     }
 }
